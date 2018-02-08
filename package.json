@@ -1,0 +1,27 @@
+{
+  "name": "truffle-test-helpers",
+  "version": "0.0.1",
+  "description": "Zeppelin-solidity inspired test helpers for truffle framework",
+  "main": "dist/index.js",
+  "repository": "https://github.com/canufeel/truffle-test-helpers",
+  "scripts": {
+    "build": "babel src -d dist",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "truffle",
+    "test",
+    "tests",
+    "truffleframework",
+    "solidity"
+  ],
+  "author": "Petr Kosikhin",
+  "license": "MIT",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "babel-preset-env": "^1.6.1",
+    "eslint": "^4.17.0",
+    "eslint-config-node-strict": "^0.0.1"
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "globals": {
+    "web3": true
+  },
+  "extends": "eslint-config-node-strict"
+}
