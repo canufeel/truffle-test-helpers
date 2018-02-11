@@ -6,7 +6,7 @@ import {
   increaseTime,
   increaseTimeTo,
   duration
-} from 'increase-time';
+} from './increase-time';
 import revert from './evm-revert';
 import latestTime from './latest-time';
 
