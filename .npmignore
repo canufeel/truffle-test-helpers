@@ -3,3 +3,5 @@ src/
 .babelrc
 yarn.lock
 .eslintrc
+*.log
+webpack.config.js
