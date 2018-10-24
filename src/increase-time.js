@@ -1,10 +1,12 @@
 import latestTime from './latest-time';
+import { getSendMethodName } from './compat';
 
-export function increaseTime (duration) {
+export const increaseTime = duration => {
   const id = Date.now();
 
   return new Promise((resolve, reject) => {
-    web3.currentProvider.sendAsync({
+    const methodName = getSendMethodName();
+    web3.currentProvider[methodName]({
       jsonrpc: '2.0',
       method: 'evm_increaseTime',
       params: [duration],
@@ -14,7 +16,7 @@ export function increaseTime (duration) {
       if (err1) {
         toReturn = reject(err1);
       } else {
-        toReturn = web3.currentProvider.sendAsync({
+        toReturn = web3.currentProvider[methodName]({
           jsonrpc: '2.0',
           method: 'evm_mine',
           id: id + 1,
@@ -25,16 +27,16 @@ export function increaseTime (duration) {
       return toReturn;
     });
   });
-}
+};
 
-export function increaseTimeTo (target) {
-  const now = latestTime();
+export const increaseTimeTo = async target => {
+  const now = await latestTime();
   if (target < now) {
     throw Error(`Cannot increase current time(${now}) to a moment in the past(${target})`);
   }
   const diff = target - now;
   return increaseTime(diff);
-}
+};
 
 export const duration = {
   seconds: function (val) { return val; },

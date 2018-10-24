@@ -32,7 +32,7 @@ const time5 = duration.weeks(1);
 const time6 = duration.years(1); 
 ```
 
-- `latestTime` gets the current time of blockchain.
+- `latestTime` gets the current time of blockchain. Async since v 0.1.0
 
 - `advanceBlock` is mostly used in a generic `before` each contract:
 
@@ -70,3 +70,10 @@ contract('MyContract', function() {
 - `advanceBlock` step to next block by mining.
 
 - `advanceToBlock` advances to specified block in time. Uses `advanceBlock` under the hood. 
+
+## Changelog
+
+### v 0.1.0:
+- Updated to support both truffle v4 and v5 beta. Truffle v5 is based on web3 1.0 which has methods incompatible with this library. This lib should support both legacy web3 0.22 and web3 1.0
+
+- `const time = await latestTime()` is now async which is a breaking change

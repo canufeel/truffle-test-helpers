@@ -1,7 +1,10 @@
+import { getSendMethodName } from './compat';
+import { getLatestBlock } from './latest-time';
 
 export function advanceBlock () {
   return new Promise((resolve, reject) => {
-    web3.currentProvider.sendAsync({
+    const methodName = getSendMethodName();
+    web3.currentProvider[methodName]({
       jsonrpc: '2.0',
       method: 'evm_mine',
       id: Date.now(),
@@ -11,12 +14,19 @@ export function advanceBlock () {
   });
 }
 
-export async function advanceToBlock (number) {
-  if (web3.eth.blockNumber > number) {
-    throw Error(`block number ${number} is in the past (current is ${web3.eth.blockNumber})`);
+const getBlockNumber = async () => {
+  const block = await getLatestBlock();
+  return block.number;
+};
+
+export const advanceToBlock = async number => {
+  let blockNumber = await getBlockNumber();
+  if (blockNumber > number) {
+    throw Error(`block number ${number} is in the past (current is ${blockNumber})`);
   }
 
-  while (web3.eth.blockNumber < number) {
+  while (blockNumber < number) {
     await advanceBlock();
+    blockNumber = await getBlockNumber();
   }
-}
+};
