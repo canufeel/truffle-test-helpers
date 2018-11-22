@@ -1,10 +1,12 @@
 import { getSendMethodName } from './compat';
 import { getLatestBlock } from './latest-time';
+import { getWeb3 } from './web3';
 
 export function advanceBlock () {
   return new Promise((resolve, reject) => {
     const methodName = getSendMethodName();
-    web3.currentProvider[methodName]({
+    const _web3 = getWeb3();
+    _web3.currentProvider[methodName]({
       jsonrpc: '2.0',
       method: 'evm_mine',
       id: Date.now(),

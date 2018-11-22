@@ -9,6 +9,7 @@ import {
 } from './increase-time';
 import revert from './evm-revert';
 import latestTime from './latest-time';
+import { setWeb3 } from './web3';
 
 export {
   advanceBlock,
@@ -17,5 +18,6 @@ export {
   increaseTimeTo,
   duration,
   revert,
-  latestTime
+  latestTime,
+  setWeb3
 };

@@ -73,6 +73,21 @@ contract('MyContract', function() {
 
 ## Changelog
 
+### v 0.1.1:
+- Added `setWeb3` interface which can be used like so:
+```
+import { setWeb3 } from 'truffle-test-helpers';
+import Web3 from 'web3';
+
+const myWeb3Instance = new Web3(
+  new Web3.providers.HttpProvider('http://localhost:8545')
+);
+
+setWeb3(myWeb3Instance);
+```
+
+This code would enable injecting `web3` into this library and allow to use it outside truffle test context i.e. in development with ganache. By default we still check the presence of web3 in global context and use it as default web3 instance to keep compatibility with truffle standard behaviour.
+
 ### v 0.1.0:
 - Updated to support both truffle v4 and v5 beta. Truffle v5 is based on web3 1.0 which has methods incompatible with this library. This lib should support both legacy web3 0.22 and web3 1.0
 

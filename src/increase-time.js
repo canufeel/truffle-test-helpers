@@ -1,12 +1,14 @@
 import latestTime from './latest-time';
 import { getSendMethodName } from './compat';
+import { getWeb3 } from './web3';
 
 export const increaseTime = duration => {
   const id = Date.now();
 
   return new Promise((resolve, reject) => {
     const methodName = getSendMethodName();
-    web3.currentProvider[methodName]({
+    const _web3 = getWeb3();
+    _web3.currentProvider[methodName]({
       jsonrpc: '2.0',
       method: 'evm_increaseTime',
       params: [duration],
@@ -16,7 +18,7 @@ export const increaseTime = duration => {
       if (err1) {
         toReturn = reject(err1);
       } else {
-        toReturn = web3.currentProvider[methodName]({
+        toReturn = _web3.currentProvider[methodName]({
           jsonrpc: '2.0',
           method: 'evm_mine',
           id: id + 1,

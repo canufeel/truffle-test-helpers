@@ -1,6 +1,8 @@
+import { getWeb3 } from './web3';
 
 export const getLatestBlock = () => new Promise((resolve) => {
-  const blockP = web3.eth.getBlock('latest');
+  const _web3 = getWeb3();
+  const blockP = _web3.eth.getBlock('latest');
   // Promise check
   if (typeof blockP.then === 'function') {
     // web3=1.0
