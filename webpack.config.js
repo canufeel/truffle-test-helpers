@@ -4,6 +4,7 @@ const path = require('path');
 module.exports = function () {
   return {
     target: 'node',
+    devtool: 'source-map',
     output: {
       path: path.join(__dirname, '/dist/'),
       library: 'truffle-test-helpers',

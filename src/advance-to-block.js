@@ -1,17 +1,19 @@
-import { getSendMethodName } from './compat';
+import {
+  wrapPayloadToCompat,
+} from './compat';
 import { getLatestBlock } from './latest-time';
-import { getWeb3 } from './web3';
 
 export function advanceBlock () {
   return new Promise((resolve, reject) => {
-    const methodName = getSendMethodName();
-    const _web3 = getWeb3();
-    _web3.currentProvider[methodName]({
+    const payload = {
       jsonrpc: '2.0',
       method: 'evm_mine',
       id: Date.now(),
-    }, (err, res) => {
-      return err ? reject(err) : resolve(res);
+    };
+    wrapPayloadToCompat({
+      resolve,
+      reject,
+      payload,
     });
   });
 }

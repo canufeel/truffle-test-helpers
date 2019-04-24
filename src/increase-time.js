@@ -1,32 +1,32 @@
 import latestTime from './latest-time';
-import { getSendMethodName } from './compat';
-import { getWeb3 } from './web3';
+import { wrapPayloadToCompat } from './compat';
 
 export const increaseTime = duration => {
   const id = Date.now();
 
   return new Promise((resolve, reject) => {
-    const methodName = getSendMethodName();
-    const _web3 = getWeb3();
-    _web3.currentProvider[methodName]({
+    const payloadIncreaseTime = {
       jsonrpc: '2.0',
       method: 'evm_increaseTime',
       params: [duration],
       id: id,
-    }, err1 => {
-      let toReturn;
-      if (err1) {
-        toReturn = reject(err1);
-      } else {
-        toReturn = _web3.currentProvider[methodName]({
-          jsonrpc: '2.0',
-          method: 'evm_mine',
-          id: id + 1,
-        }, (err2, res) => {
-          return err2 ? reject(err2) : resolve(res);
-        });
-      }
-      return toReturn;
+    };
+    const mineNextBlock = () => {
+      const nextBlockPayload = {
+        jsonrpc: '2.0',
+        method: 'evm_mine',
+        id: id + 1,
+      };
+      wrapPayloadToCompat({
+        reject,
+        resolve,
+        payload: nextBlockPayload,
+      });
+    };
+    wrapPayloadToCompat({
+      reject,
+      resolve: mineNextBlock,
+      payload: payloadIncreaseTime,
     });
   });
 };

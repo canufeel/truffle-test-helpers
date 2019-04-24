@@ -73,6 +73,10 @@ contract('MyContract', function() {
 
 ## Changelog
 
+### v 0.2.0:
+
+- Added compatibility for web3@1.0.0-beta.52 for `increaseTime` and `advanceBlock` methods. They would now use `sendPayload` instead of `send` on web3 current provider if it exists as in recent web3 versions api of `send` has been changed to accept just json-rpc method instead of payload object.
+
 ### v 0.1.1:
 - Added `setWeb3` interface which can be used like so:
 ```
