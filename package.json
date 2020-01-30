@@ -1,6 +1,6 @@
 {
   "name": "truffle-test-helpers",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Zeppelin-solidity inspired test helpers for truffle framework",
   "main": "dist/index.js",
   "repository": "https://github.com/canufeel/truffle-test-helpers",
