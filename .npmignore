@@ -1,7 +1,7 @@
 src/
 .idea/
 .babelrc
-yarn.lock
+node_modules/
 .eslintrc
 *.log
 webpack.config.js
